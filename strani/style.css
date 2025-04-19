@@ -11,8 +11,31 @@ h1, h2, h3 {
   font-weight: 700;
 }
 
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+}
+
 a {
   text-decoration: none;
+}
+/* osnovno styling dropdown menija */
+.navbar-nav .dropdown-menu {
+  background-color: #343a40; /* temno ozadje */
+}
+
+/* normalni item */
+.navbar-nav .dropdown-menu .dropdown-item {
+  color: #fff;
+}
+
+/* ko je item hover/an active */
+.navbar-nav .dropdown-menu .dropdown-item:hover,
+.navbar-nav .dropdown-menu .dropdown-item.active {
+  background-color: #fff !important;
+  color: #000 !important;
 }
 
 img {
@@ -26,18 +49,10 @@ img {
   text-transform: uppercase;
 }
 
-/* Hero sekcija */
-.hero {
-  background-image: url('images/sunset-hike.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: white;
+.sticky-top {
+  position: sticky;
+  top: 0;
+  z-index: 1020;
 }
 
 .hero h1 {
