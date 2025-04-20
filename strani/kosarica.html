@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Košarica</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container py-5">
+    <h1>Košarica</h1>
+    <div id="kosarica"></div>
+    <div id="skupaj" class="fw-bold mt-3"></div>
+    <button id="pocisti" class="btn btn-danger mt-3">Počisti košarico</button>
+  </div>
+
+  <script>
+    function prikaziKosarico() {
+      const kosarica = JSON.parse(localStorage.getItem("kosarica")) || [];
+      const div = document.getElementById("kosarica");
+
+      if (kosarica.length === 0) {
+        div.innerHTML = "<p>Košarica je prazna.</p>";
+        document.getElementById("skupaj").textContent = "";
+        return;
+      }
+
+      let html = `<table class="table"><thead><tr><th>Izdelek</th><th>Količina</th><th>Cena</th><th>Skupaj</th><th></th></tr></thead><tbody>`;
+      let vsota = 0;
+
+      kosarica.forEach((item, index) => {
+        let skupaj = item.kolicina * item.cena;
+        vsota += skupaj;
+        html += `<tr>
+          <td>${item.naziv}</td>
+          <td>${item.kolicina}</td>
+          <td>${item.cena.toFixed(2)} €</td>
+          <td>${skupaj.toFixed(2)} €</td>
+          <td><button class="btn btn-sm btn-outline-danger" onclick="odstrani(${index})">🗑</button></td>
+        </tr>`;
+      });
+
+      html += "</tbody></table>";
+      div.innerHTML = html;
+      document.getElementById("skupaj").textContent = `Skupaj: ${vsota.toFixed(2)} €`;
+    }
+
+    function odstrani(index) {
+      let kosarica = JSON.parse(localStorage.getItem("kosarica")) || [];
+      kosarica.splice(index, 1);
+      localStorage.setItem("kosarica", JSON.stringify(kosarica));
+      prikaziKosarico();
+    }
+
+    document.getElementById("pocisti").addEventListener("click", () => {
+      localStorage.removeItem("kosarica");
+      prikaziKosarico();
+    });
+
+    prikaziKosarico();
+  </script>
+</body>
+</html>
