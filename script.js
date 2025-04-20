@@ -44,28 +44,41 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
     // ==========================
-    // Košarica – dodajanje izdelkov
+    // Prikaz vsebine košarice
     // ==========================
-    const gumbi = document.querySelectorAll(".dodaj-v-kosarico");
+    const kosaricaVsebina = document.getElementById("kosarica-vsebina");
+    const kosaricaSkupaj = document.getElementById("kosarica-skupaj");
 
-    gumbi.forEach(gumb => {
-        gumb.addEventListener("click", function () {
-            const id = this.dataset.id;
-            const naziv = this.dataset.naziv;
-            const cena = parseFloat(this.dataset.cena);
+    const izdelki = JSON.parse(localStorage.getItem("kosarica")) || [];
 
-            let kosarica = JSON.parse(localStorage.getItem("kosarica")) || [];
+    if (izdelki.length === 0) {
+        kosaricaVsebina.innerHTML = "<p>Vaša košarica je prazna.</p>";
+        kosaricaSkupaj.textContent = "";
+        return;
+    }
 
-            const obstaja = kosarica.find(izdelek => izdelek.id === id);
-            if (obstaja) {
-                obstaja.kolicina += 1;
-            } else {
-                kosarica.push({ id, naziv, cena, kolicina: 1 });
-            }
+    let skupaj = 0;
 
-            localStorage.setItem("kosarica", JSON.stringify(kosarica));
+    const tabela = document.createElement("table");
+    tabela.className = "table table-striped";
+    tabela.innerHTML = `
+      <thead>
+        <tr>
+          <th>Izdelek</th>
+          <th>Cena (€)</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${izdelki.map(izdelek => {
+          skupaj += parseFloat(izdelek.cena);
+          return `<tr>
+            <td>${izdelek.naziv}</td>
+            <td>${izdelek.cena}</td>
+          </tr>`;
+        }).join("")}
+      </tbody>
+    `;
 
-            alert(`"${naziv}" je bil dodan v košarico.`);
-        });
-    });
+    kosaricaVsebina.appendChild(tabela);
+    kosaricaSkupaj.textContent = `Skupaj: ${skupaj.toFixed(2)} €`;
 });
