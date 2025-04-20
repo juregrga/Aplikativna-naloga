@@ -43,3 +43,29 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+    // ==========================
+    // Košarica – dodajanje izdelkov
+    // ==========================
+    const gumbi = document.querySelectorAll(".dodaj-v-kosarico");
+
+    gumbi.forEach(gumb => {
+        gumb.addEventListener("click", function () {
+            const id = this.dataset.id;
+            const naziv = this.dataset.naziv;
+            const cena = parseFloat(this.dataset.cena);
+
+            let kosarica = JSON.parse(localStorage.getItem("kosarica")) || [];
+
+            const obstaja = kosarica.find(izdelek => izdelek.id === id);
+            if (obstaja) {
+                obstaja.kolicina += 1;
+            } else {
+                kosarica.push({ id, naziv, cena, kolicina: 1 });
+            }
+
+            localStorage.setItem("kosarica", JSON.stringify(kosarica));
+
+            alert(`"${naziv}" je bil dodan v košarico.`);
+        });
+    });
+});
