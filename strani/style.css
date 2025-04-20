@@ -110,4 +110,45 @@ footer p {
   max-height: 100px;
 }
 
-  
+  /* Enaka višina in odzivnost slik */
+  .product-img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+  }
+  /* Zoom efekt ob hover */
+  .product-img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s;
+  }
+
+  /* Cenovna oznaka */
+  .price {
+    font-size: 1.25rem;
+    color: #000;
+    font-weight: bold;
+    margin-top: 0.5rem;
+  }
+  /* Razmik med menijskimi povezavami */
+  .navbar-nav .nav-link {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+
+  .hero {
+    background-image: url('images/sunset-hike.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+  }
+  /* Razmik med menijskimi povezavami */
+  .navbar-nav .nav-link {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
