@@ -26,6 +26,11 @@ a {
   background-color: #343a40; /* temno ozadje */
 }
 
+.navbar-nav .nav-link {
+  padding-left: 1.5rem !important;
+  padding-right: 1.5rem !important;
+}
+
 /* normalni item */
 .navbar-nav .dropdown-menu .dropdown-item {
   color: #fff;
