@@ -42,8 +42,8 @@ document.addEventListener("DOMContentLoaded", function () {
             form.reset();
         }
     });
-});
-    // ==========================
+
+        // ==========================
     // Prikaz vsebine košarice
     // ==========================
     const kosaricaVsebina = document.getElementById("kosarica-vsebina");
@@ -82,3 +82,4 @@ document.addEventListener("DOMContentLoaded", function () {
     kosaricaVsebina.appendChild(tabela);
     kosaricaSkupaj.textContent = `Skupaj: ${skupaj.toFixed(2)} €`;
 });
+
